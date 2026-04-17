@@ -99,7 +99,7 @@ const Index = () => {
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl">
             Стань тренером в{" "}
-            <span className="bg-gradient-to-r from-brand-glow to-accent bg-clip-text text-transparent">
+            <span className="text-brand-glow">
               MUV
             </span>{" "}
             — фитнес-платформе нового поколения
