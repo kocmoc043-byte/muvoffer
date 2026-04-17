@@ -149,12 +149,14 @@ const Index = () => {
             <PhoneMock src={screen2} alt="Профиль тренера" rotate="3deg" />
             <PhoneMock src={screen3} alt="Информация о тренере" rotate="-3deg" />
             <PhoneMock src={screen4} alt="Карточка тренировки" rotate="4deg" />
-            <PhoneMock
-              src={screen5}
-              alt="Плеер тренировки"
-              rotate="-5deg"
-              imageClassName="w-full h-full object-contain object-center bg-background"
-            />
+            <div className="no-print">
+              <PhoneMock
+                src={screen5}
+                alt="Плеер тренировки"
+                rotate="-5deg"
+                imageClassName="w-full h-full object-contain object-center bg-background"
+              />
+            </div>
           </div>
         </div>
       </header>
