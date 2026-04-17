@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import PhoneMock from "@/components/PhoneMock";
+import { exportPdf } from "@/lib/exportPdf";
 import screen1 from "@/assets/screens/screen-1.png";
 import screen2 from "@/assets/screens/screen-2.png";
 import screen3 from "@/assets/screens/screen-3.png";
@@ -7,6 +9,7 @@ import screen4 from "@/assets/screens/screen-4.png";
 import screen5 from "@/assets/screens/screen-5.png";
 import {
   Download,
+  Loader2,
   UserPlus,
   Camera,
   Video,
@@ -32,7 +35,7 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <section className="relative">
+  <section className="relative" data-pdf-section>
     <div className="flex items-center gap-4 mb-8">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brand-glow text-brand-foreground font-bold text-xl shadow-[var(--shadow-glow)]">
         {number}
