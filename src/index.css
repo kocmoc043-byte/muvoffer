@@ -122,3 +122,33 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 270 30% 10%;
+    --surface: 0 0% 100%;
+    --surface-elevated: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 270 30% 10%;
+    --muted-foreground: 270 10% 35%;
+    --border: 270 15% 85%;
+  }
+  html, body {
+    background: #fff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  section, .print-keep {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  a {
+    color: hsl(270 60% 35%) !important;
+    text-decoration: underline;
+  }
+  [style*="gradient"], .bg-gradient-hero {
+    background: #fff !important;
+  }
+}
