@@ -69,10 +69,22 @@ const Card = ({
 );
 
 const Index = () => {
+  const [exporting, setExporting] = useState(false);
+
+  const handleExport = async () => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      await exportPdf("[data-pdf-root]", "MUV-trainer-brief.pdf");
+    } finally {
+      setExporting(false);
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <main data-pdf-root className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* HERO */}
-      <header className="relative overflow-hidden">
+      <header className="relative overflow-hidden" data-pdf-section>
         <div
           className="absolute inset-0 opacity-90"
           style={{ background: "var(--gradient-hero)" }}
@@ -138,10 +150,16 @@ const Index = () => {
             <Button
               size="lg"
               variant="ghost"
-              onClick={() => window.print()}
+              onClick={handleExport}
+              disabled={exporting}
               className="hover:bg-brand/10 no-print"
             >
-              <Download className="w-4 h-4 mr-2" /> Скачать PDF
+              {exporting ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Download className="w-4 h-4 mr-2" />
+              )}
+              {exporting ? "Готовим PDF…" : "Скачать PDF"}
             </Button>
           </div>
 
