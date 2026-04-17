@@ -284,11 +284,13 @@ const Index = () => {
                 Объясняйте, как правильно выполнять каждое упражнение: техника, дыхание, типичные ошибки.
               </Card>
             </div>
-            <PhoneMock
-              src={screen5}
-              alt="Плеер тренировки в MUV"
-              imageClassName="w-full h-full object-contain object-center bg-background"
-            />
+            <div className="no-print">
+              <PhoneMock
+                src={screen5}
+                alt="Плеер тренировки в MUV"
+                imageClassName="w-full h-full object-contain object-center bg-background"
+              />
+            </div>
           </div>
         </section>
 
