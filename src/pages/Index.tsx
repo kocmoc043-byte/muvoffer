@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import PhoneMock from "@/components/PhoneMock";
+import { exportPdf } from "@/lib/exportPdf";
 import screen1 from "@/assets/screens/screen-1.png";
 import screen2 from "@/assets/screens/screen-2.png";
 import screen3 from "@/assets/screens/screen-3.png";
@@ -7,6 +9,7 @@ import screen4 from "@/assets/screens/screen-4.png";
 import screen5 from "@/assets/screens/screen-5.png";
 import {
   Download,
+  Loader2,
   UserPlus,
   Camera,
   Video,
@@ -32,7 +35,7 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <section className="relative">
+  <section className="relative" data-pdf-section>
     <div className="flex items-center gap-4 mb-8">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brand-glow text-brand-foreground font-bold text-xl shadow-[var(--shadow-glow)]">
         {number}
@@ -66,10 +69,22 @@ const Card = ({
 );
 
 const Index = () => {
+  const [exporting, setExporting] = useState(false);
+
+  const handleExport = async () => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      await exportPdf("[data-pdf-root]", "MUV-trainer-brief.pdf");
+    } finally {
+      setExporting(false);
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <main data-pdf-root className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* HERO */}
-      <header className="relative overflow-hidden">
+      <header className="relative overflow-hidden" data-pdf-section>
         <div
           className="absolute inset-0 opacity-90"
           style={{ background: "var(--gradient-hero)" }}
@@ -135,15 +150,21 @@ const Index = () => {
             <Button
               size="lg"
               variant="ghost"
-              onClick={() => window.print()}
+              onClick={handleExport}
+              disabled={exporting}
               className="hover:bg-brand/10 no-print"
             >
-              <Download className="w-4 h-4 mr-2" /> Скачать PDF
+              {exporting ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Download className="w-4 h-4 mr-2" />
+              )}
+              {exporting ? "Готовим PDF…" : "Скачать PDF"}
             </Button>
           </div>
 
           {/* Phones row */}
-          <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4 no-print">
+          <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4">
             <PhoneMock src={screen1} alt="Регистрация в MUV" rotate="-6deg" />
             <PhoneMock src={screen2} alt="Профиль тренера" rotate="3deg" />
             <PhoneMock src={screen3} alt="Информация о тренере" rotate="-3deg" />
@@ -325,7 +346,7 @@ const Index = () => {
         </Section>
 
         {/* DOWNLOAD APP */}
-        <section className="rounded-3xl bg-gradient-to-br from-brand-deep via-brand to-brand-glow p-1 shadow-[var(--shadow-glow)]">
+        <section className="rounded-3xl bg-gradient-to-br from-brand-deep via-brand to-brand-glow p-1 shadow-[var(--shadow-glow)]" data-pdf-section>
           <div className="rounded-[calc(1.5rem-4px)] bg-background/95 backdrop-blur p-10 md:p-14">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
@@ -372,7 +393,7 @@ const Index = () => {
         </section>
 
         {/* CHECKLIST */}
-        <section>
+        <section data-pdf-section>
           <h2 className="text-3xl md:text-4xl font-bold mb-8 tracking-tight">
             ✅ Финальный чек-лист
           </h2>
