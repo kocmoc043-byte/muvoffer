@@ -7,17 +7,19 @@ const MARGIN_MM = 10;
 const GAP_MM = 4;
 const CONTENT_WIDTH_MM = A4_WIDTH_MM - MARGIN_MM * 2;
 const CONTENT_HEIGHT_MM = A4_HEIGHT_MM - MARGIN_MM * 2;
-
-// Фон страницы PDF (соответствует --background: 270 30% 6%)
 const PAGE_BG = "#0f0a17";
 
 async function captureSection(el: HTMLElement) {
-  return await html2canvas(el, {
+  return html2canvas(el, {
     scale: 2,
     useCORS: true,
     backgroundColor: null,
     logging: false,
-    windowWidth: el.scrollWidth,
+    scrollX: -window.scrollX,
+    scrollY: -window.scrollY,
+    windowWidth: document.documentElement.scrollWidth,
+    windowHeight: document.documentElement.scrollHeight,
+    ignoreElements: (element) => element.classList?.contains("no-print") ?? false,
   });
 }
 
@@ -26,18 +28,28 @@ function paintBg(pdf: jsPDF) {
   pdf.rect(0, 0, A4_WIDTH_MM, A4_HEIGHT_MM, "F");
 }
 
-/**
- * Экспортирует элементы с [data-pdf-section] в PDF, не разрезая секции
- * между страницами. Если секция выше страницы — она аккуратно режется
- * на куски по высоте страницы.
- */
-export async function exportPdf(rootSelector = "[data-pdf-root]", filename = "MUV-trainer-brief.pdf") {
+function addCanvasToPdf(
+  pdf: jsPDF,
+  canvas: HTMLCanvasElement,
+  y: number,
+  targetHeightMM?: number
+) {
+  const widthMM = CONTENT_WIDTH_MM;
+  const mmPerPx = CONTENT_WIDTH_MM / canvas.width;
+  const heightMM = targetHeightMM ?? canvas.height * mmPerPx;
+  const imgData = canvas.toDataURL("image/png");
+  pdf.addImage(imgData, "PNG", MARGIN_MM, y, widthMM, heightMM);
+  return heightMM;
+}
+
+export async function exportPdf(
+  rootSelector = "[data-pdf-root]",
+  filename = "MUV-trainer-brief.pdf"
+) {
   const root = document.querySelector(rootSelector) as HTMLElement | null;
   if (!root) return;
 
-  const sections = Array.from(
-    root.querySelectorAll<HTMLElement>("[data-pdf-section]")
-  );
+  const sections = Array.from(root.querySelectorAll<HTMLElement>("[data-pdf-section]"));
   if (sections.length === 0) return;
 
   const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
@@ -45,65 +57,57 @@ export async function exportPdf(rootSelector = "[data-pdf-root]", filename = "MU
 
   let currentY = MARGIN_MM;
 
-  for (let i = 0; i < sections.length; i++) {
-    const canvas = await captureSection(sections[i]);
-    const imgWidthPx = canvas.width;
-    const imgHeightPx = canvas.height;
-    const scale = CONTENT_WIDTH_MM / (imgWidthPx / 2);
-    const renderWidthMM = CONTENT_WIDTH_MM;
-    const renderHeightMM = (imgHeightPx / 2) * scale;
+  for (const section of sections) {
+    const canvas = await captureSection(section);
+    const mmPerPx = CONTENT_WIDTH_MM / canvas.width;
+    const renderHeightMM = canvas.height * mmPerPx;
+    const remainingMM = A4_HEIGHT_MM - MARGIN_MM - currentY;
 
-    const imgData = canvas.toDataURL("image/jpeg", 0.92);
-
-    // Если секция помещается на текущую страницу — кладём целиком
-    const remaining = A4_HEIGHT_MM - MARGIN_MM - currentY;
-    if (renderHeightMM <= remaining) {
-      pdf.addImage(imgData, "JPEG", MARGIN_MM, currentY, renderWidthMM, renderHeightMM);
-      currentY += renderHeightMM + GAP_MM;
+    if (renderHeightMM <= remainingMM) {
+      currentY += addCanvasToPdf(pdf, canvas, currentY) + GAP_MM;
       continue;
     }
 
-    // Не помещается — начинаем с новой страницы
     if (currentY > MARGIN_MM) {
       pdf.addPage();
       paintBg(pdf);
       currentY = MARGIN_MM;
     }
 
-    // Если секция в принципе влезает на пустую страницу — кладём целиком
     if (renderHeightMM <= CONTENT_HEIGHT_MM) {
-      pdf.addImage(imgData, "JPEG", MARGIN_MM, currentY, renderWidthMM, renderHeightMM);
-      currentY += renderHeightMM + GAP_MM;
+      currentY += addCanvasToPdf(pdf, canvas, currentY) + GAP_MM;
       continue;
     }
 
-    // Очень длинная секция — режем canvas на куски по высоте страницы
-    const pageHeightPx = (CONTENT_HEIGHT_MM / scale) * 2;
+    const pageHeightPx = Math.floor(CONTENT_HEIGHT_MM / mmPerPx);
     let offsetPx = 0;
-    while (offsetPx < imgHeightPx) {
-      const sliceHeightPx = Math.min(pageHeightPx, imgHeightPx - offsetPx);
+
+    while (offsetPx < canvas.height) {
+      const sliceHeightPx = Math.min(pageHeightPx, canvas.height - offsetPx);
       const sliceCanvas = document.createElement("canvas");
-      sliceCanvas.width = imgWidthPx;
+      sliceCanvas.width = canvas.width;
       sliceCanvas.height = sliceHeightPx;
-      const ctx = sliceCanvas.getContext("2d")!;
+
+      const ctx = sliceCanvas.getContext("2d");
+      if (!ctx) break;
+
       ctx.drawImage(
         canvas,
         0,
         offsetPx,
-        imgWidthPx,
+        canvas.width,
         sliceHeightPx,
         0,
         0,
-        imgWidthPx,
+        canvas.width,
         sliceHeightPx
       );
-      const sliceData = sliceCanvas.toDataURL("image/jpeg", 0.92);
-      const sliceHeightMM = (sliceHeightPx / 2) * scale;
 
-      pdf.addImage(sliceData, "JPEG", MARGIN_MM, MARGIN_MM, renderWidthMM, sliceHeightMM);
+      const sliceHeightMM = sliceHeightPx * mmPerPx;
+      addCanvasToPdf(pdf, sliceCanvas, MARGIN_MM, sliceHeightMM);
       offsetPx += sliceHeightPx;
 
-      if (offsetPx < imgHeightPx) {
+      if (offsetPx < canvas.height) {
         pdf.addPage();
         paintBg(pdf);
       } else {
