@@ -354,17 +354,17 @@ const Index = () => {
                 <p className="text-muted-foreground text-lg mb-8">
                   Скачайте приложение и переходите на сайт MUV, чтобы начать работу.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-wrap gap-3">
                   <Button
                     asChild
                     size="lg"
-                    className="bg-gradient-to-r from-brand to-brand-glow text-brand-foreground"
+                    className="bg-gradient-to-r from-brand to-brand-glow text-brand-foreground sm:flex-none"
                   >
                     <a href="https://muv-app.ru/" target="_blank" rel="noreferrer">
                       <Globe className="w-4 h-4 mr-2" /> Сайт muv-app.ru
                     </a>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-brand/40">
+                  <Button asChild size="lg" variant="outline" className="border-brand/40 sm:flex-none">
                     <a
                       href="https://apps.apple.com/ru/app/%D0%BC%D1%83%D0%B2/id6746817734"
                       target="_blank"
@@ -373,7 +373,7 @@ const Index = () => {
                       App Store
                     </a>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-brand/40">
+                  <Button asChild size="lg" variant="outline" className="border-brand/40 sm:flex-none">
                     <a
                       href="https://www.rustore.ru/catalog/app/com.muv.fitness"
                       target="_blank"
@@ -384,9 +384,14 @@ const Index = () => {
                   </Button>
                 </div>
               </div>
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-4 flex-wrap">
                 <PhoneMock src={screen2} alt="Профиль" rotate="-4deg" />
-                <PhoneMock src={screen4} alt="Тренировка" rotate="4deg" />
+                <PhoneMock
+                  src={screen4}
+                  alt="Тренировка"
+                  rotate="4deg"
+                  imageClassName="w-full h-full object-contain object-center bg-background"
+                />
               </div>
             </div>
           </div>
