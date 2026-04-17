@@ -164,7 +164,7 @@ const Index = () => {
           </div>
 
           {/* Phones row */}
-          <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4 no-print">
+          <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4">
             <PhoneMock src={screen1} alt="Регистрация в MUV" rotate="-6deg" />
             <PhoneMock src={screen2} alt="Профиль тренера" rotate="3deg" />
             <PhoneMock src={screen3} alt="Информация о тренере" rotate="-3deg" />
@@ -346,7 +346,7 @@ const Index = () => {
         </Section>
 
         {/* DOWNLOAD APP */}
-        <section className="rounded-3xl bg-gradient-to-br from-brand-deep via-brand to-brand-glow p-1 shadow-[var(--shadow-glow)]">
+        <section className="rounded-3xl bg-gradient-to-br from-brand-deep via-brand to-brand-glow p-1 shadow-[var(--shadow-glow)]" data-pdf-section>
           <div className="rounded-[calc(1.5rem-4px)] bg-background/95 backdrop-blur p-10 md:p-14">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
@@ -393,7 +393,7 @@ const Index = () => {
         </section>
 
         {/* CHECKLIST */}
-        <section>
+        <section data-pdf-section>
           <h2 className="text-3xl md:text-4xl font-bold mb-8 tracking-tight">
             ✅ Финальный чек-лист
           </h2>
