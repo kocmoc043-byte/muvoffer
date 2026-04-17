@@ -136,14 +136,14 @@ const Index = () => {
               size="lg"
               variant="ghost"
               onClick={() => window.print()}
-              className="hover:bg-brand/10"
+              className="hover:bg-brand/10 no-print"
             >
               <Download className="w-4 h-4 mr-2" /> Скачать PDF
             </Button>
           </div>
 
           {/* Phones row */}
-          <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4">
+          <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4 no-print">
             <PhoneMock src={screen1} alt="Регистрация в MUV" rotate="-6deg" />
             <PhoneMock src={screen2} alt="Профиль тренера" rotate="3deg" />
             <PhoneMock src={screen3} alt="Информация о тренере" rotate="-3deg" />
