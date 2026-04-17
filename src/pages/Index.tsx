@@ -80,7 +80,7 @@ const Index = () => {
         <div className="relative container max-w-6xl py-16 md:py-24">
           <div className="inline-flex items-center gap-2 rounded-full bg-brand/15 ring-1 ring-brand/30 px-4 py-1.5 text-sm text-brand-glow mb-6">
             <Sparkles className="w-4 h-4" />
-            Техническое задание для тренеров-олимпийцев
+            Техническое задание для тренеров
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl">
             Стань тренером в{" "}
