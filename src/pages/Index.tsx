@@ -130,7 +130,7 @@ const Index = () => {
     if (exporting) return;
     setExporting(true);
     try {
-      await exportPdf("[data-pdf-root]", "Move-author-brief.pdf");
+      await exportPdf("[data-pdf-root]", "MUV-author-brief.pdf");
     } finally {
       setExporting(false);
     }
@@ -155,10 +155,10 @@ const Index = () => {
             Техническое задание для авторов
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl">
-            Как снимать тренировку для <span className="text-brand-glow">Move</span>
+            Как снимать тренировку для <span className="text-brand-glow">МУВ</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10">
-            Снимайте тренировку так, как вы проводите её в реальной жизни. Команда Move сама разберёт
+            Снимайте тренировку так, как вы проводите её в реальной жизни. Команда МУВ сама разберёт
             материал, обрежет лишнее и подготовит к публикации в приложении.
           </p>
 
@@ -217,14 +217,14 @@ const Index = () => {
           </div>
 
           <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4">
-            <PhoneMock src={screen1} alt="Move — экран тренировки" rotate="-6deg" />
-            <PhoneMock src={screen2} alt="Move — профиль автора" rotate="3deg" />
-            <PhoneMock src={screen3} alt="Move — карточка тренировки" rotate="-3deg" />
-            <PhoneMock src={screen4} alt="Move — плеер" rotate="4deg" />
+            <PhoneMock src={screen1} alt="МУВ — экран тренировки" rotate="-6deg" />
+            <PhoneMock src={screen2} alt="МУВ — профиль автора" rotate="3deg" />
+            <PhoneMock src={screen3} alt="МУВ — карточка тренировки" rotate="-3deg" />
+            <PhoneMock src={screen4} alt="МУВ — плеер" rotate="4deg" />
             <div className="no-print">
               <PhoneMock
                 src={screen5}
-                alt="Move — видео тренировки"
+                alt="МУВ — видео тренировки"
                 rotate="-5deg"
                 imageClassName="w-full h-full object-contain object-center bg-background"
               />
@@ -244,7 +244,7 @@ const Index = () => {
               Тренировка может длиться 60, 90 минут или дольше. Не переживайте, что видео получилось
               длинным — это нормально и ожидаемо.
             </Card>
-            <Card icon={Layers} title="Move делает монтаж">
+            <Card icon={Layers} title="МУВ делает монтаж">
               Наша команда самостоятельно разберёт материал, обрежет лишнее, разделит тренировку на
               блоки и при необходимости соберёт из одного видео несколько отдельных тренировок.
             </Card>
@@ -307,7 +307,7 @@ const Index = () => {
                 полезно.
               </Card>
             </div>
-            <PhoneMock src={screen3} alt="Move — карточка тренировки" />
+            <PhoneMock src={screen3} alt="МУВ — карточка тренировки" />
           </div>
         </Section>
 
@@ -337,7 +337,7 @@ const Index = () => {
             </Card>
           </div>
           <div className="mt-4 rounded-2xl bg-brand/10 ring-1 ring-brand/30 p-5 text-[15px] text-foreground/90">
-            💬 На монтаже Move отдельно выделит рекомендации для каждого уровня — это помогает
+            💬 На монтаже МУВ отдельно выделит рекомендации для каждого уровня — это помогает
             аудитории выбрать подходящую нагрузку.
           </div>
         </Section>
@@ -366,7 +366,7 @@ const Index = () => {
             <div className="no-print">
               <PhoneMock
                 src={screen5}
-                alt="Move — плеер тренировки"
+                alt="МУВ — плеер тренировки"
                 imageClassName="w-full h-full object-contain object-center bg-background"
               />
             </div>
@@ -401,7 +401,7 @@ const Index = () => {
               <p className="text-muted-foreground text-[15px]">
                 Ваша задача — снять{" "}
                 <span className="text-foreground font-semibold">качественный исходный материал</span>
-                . Наша задача — аккуратно упаковать его в формат приложения Move.
+                . Наша задача — аккуратно упаковать его в формат приложения МУВ.
               </p>
             </div>
           </div>
@@ -525,7 +525,7 @@ const Index = () => {
                   Снимайте так, как тренируете в жизни
                 </h2>
                 <p className="text-muted-foreground text-lg mb-8">
-                  Скачайте приложение Move и переходите на сайт, чтобы начать работу.
+                  Скачайте приложение МУВ и переходите на сайт, чтобы начать работу.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button
@@ -572,8 +572,8 @@ const Index = () => {
                 </div>
               </div>
               <div className="flex justify-center gap-4 flex-wrap">
-                <PhoneMock src={screen2} alt="Move — профиль" rotate="-4deg" />
-                <PhoneMock src={screen4} alt="Move — тренировка" rotate="4deg" />
+                <PhoneMock src={screen2} alt="МУВ — профиль" rotate="-4deg" />
+                <PhoneMock src={screen4} alt="МУВ — тренировка" rotate="4deg" />
               </div>
             </div>
           </div>
@@ -583,7 +583,7 @@ const Index = () => {
       <footer className="border-t border-brand/15 bg-surface/50">
         <div className="container max-w-6xl py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>
-            <span className="font-bold text-foreground">Move</span> — фитнес-платформа нового
+            <span className="font-bold text-foreground">МУВ</span> — фитнес-платформа нового
             поколения
           </div>
           <div className="flex gap-5">
