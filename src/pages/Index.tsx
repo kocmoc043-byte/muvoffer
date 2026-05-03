@@ -373,39 +373,6 @@ const Index = () => {
           </div>
         </Section>
 
-        <div
-          data-pdf-section
-          className="rounded-2xl bg-gradient-to-br from-brand-deep via-brand/50 to-surface-elevated ring-1 ring-brand/40 p-6 md:p-8 -mt-16"
-        >
-          <div className="flex items-start gap-4">
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand text-brand-foreground shrink-0">
-              <Video className="w-6 h-6" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-bold mb-4">Что не нужно делать</h3>
-              <div className="grid sm:grid-cols-2 gap-2 mb-4">
-                {[
-                  "Специально сокращать тренировку",
-                  "Делать всё слишком быстро",
-                  "Молчать весь ролик",
-                  "Снимать только «идеальные» короткие куски",
-                  "Переживать, что видео получилось длинным",
-                  "Самостоятельно делить видео на блоки и уроки",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2 text-[15px] text-muted-foreground">
-                    <span className="text-brand-glow mt-0.5 shrink-0 font-bold">✕</span>
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-muted-foreground text-[15px]">
-                Ваша задача — снять{" "}
-                <span className="text-foreground font-semibold">качественный исходный материал</span>
-                . Наша задача — аккуратно упаковать его в формат приложения МУВ.
-              </p>
-            </div>
-          </div>
-        </div>
 
         <section data-pdf-section>
           <h2 className="text-3xl md:text-4xl font-bold mb-8 tracking-tight">
