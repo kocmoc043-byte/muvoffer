@@ -30,19 +30,24 @@ import {
 const Section = ({
   number,
   title,
+  subtitle,
   children,
 }: {
   number: string;
   title: string;
+  subtitle?: string;
   children: React.ReactNode;
 }) => (
   <section className="relative" data-pdf-section>
-    <div className="flex items-center gap-4 mb-8">
+    <div className="flex items-center gap-4 mb-6">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brand-glow text-brand-foreground font-bold text-xl shadow-[var(--shadow-glow)]">
         {number}
       </div>
       <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
     </div>
+    {subtitle && (
+      <p className="text-lg text-muted-foreground max-w-3xl mb-8">{subtitle}</p>
+    )}
     {children}
   </section>
 );
@@ -51,21 +56,68 @@ const Card = ({
   icon: Icon,
   title,
   children,
+  tone = "default",
 }: {
   icon?: React.ComponentType<{ className?: string }>;
-  title: string;
+  title?: string;
   children: React.ReactNode;
-}) => (
-  <div className="rounded-2xl bg-surface-elevated/60 backdrop-blur p-6 ring-1 ring-brand/15 hover:ring-brand/40 transition-all">
-    <div className="flex items-start gap-3 mb-3">
-      {Icon && (
-        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-brand/15 text-brand-glow shrink-0">
-          <Icon className="w-5 h-5" />
+  tone?: "default" | "danger" | "good";
+}) => {
+  const ringColor =
+    tone === "danger"
+      ? "ring-destructive/30 hover:ring-destructive/60"
+      : tone === "good"
+        ? "ring-brand-glow/40 hover:ring-brand-glow/70"
+        : "ring-brand/15 hover:ring-brand/40";
+  const iconBg =
+    tone === "danger"
+      ? "bg-destructive/15 text-destructive"
+      : "bg-brand/15 text-brand-glow";
+  return (
+    <div
+      className={`rounded-2xl bg-surface-elevated/60 backdrop-blur p-6 ring-1 transition-all ${ringColor}`}
+    >
+      {(Icon || title) && (
+        <div className="flex items-start gap-3 mb-3">
+          {Icon && (
+            <div
+              className={`flex items-center justify-center w-10 h-10 rounded-xl shrink-0 ${iconBg}`}
+            >
+              <Icon className="w-5 h-5" />
+            </div>
+          )}
+          {title && (
+            <h3 className="text-lg font-semibold leading-tight pt-1.5">
+              {title}
+            </h3>
+          )}
         </div>
       )}
-      <h3 className="text-lg font-semibold leading-tight pt-1.5">{title}</h3>
+      <div className="text-muted-foreground leading-relaxed text-[15px]">
+        {children}
+      </div>
     </div>
-    <div className="text-muted-foreground leading-relaxed text-[15px]">{children}</div>
+  );
+};
+
+const TableRow = ({
+  left,
+  right,
+  header = false,
+}: {
+  left: string;
+  right: string;
+  header?: boolean;
+}) => (
+  <div
+    className={`grid grid-cols-[180px_1fr] md:grid-cols-[240px_1fr] gap-4 px-5 py-4 ${
+      header
+        ? "bg-brand/15 text-foreground font-semibold"
+        : "border-t border-brand/15 text-muted-foreground"
+    }`}
+  >
+    <div className={header ? "" : "text-foreground font-medium"}>{left}</div>
+    <div>{right}</div>
   </div>
 );
 
@@ -83,9 +135,15 @@ const Index = () => {
   };
 
   return (
-    <main data-pdf-root className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <main
+      data-pdf-root
+      className="min-h-screen bg-background text-foreground overflow-x-hidden"
+    >
       <header className="relative overflow-hidden" data-pdf-section>
-        <div className="absolute inset-0 opacity-90" style={{ background: "var(--gradient-hero)" }} />
+        <div
+          className="absolute inset-0 opacity-90"
+          style={{ background: "var(--gradient-hero)" }}
+        />
         <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/30 blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-brand-glow/20 blur-3xl" />
 
@@ -112,7 +170,12 @@ const Index = () => {
                 <Globe className="w-4 h-4 mr-2" /> muv-app.ru
               </a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-brand/40 hover:bg-brand/10">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-brand/40 hover:bg-brand/10"
+            >
               <a
                 href="https://apps.apple.com/ru/app/%D0%BC%D1%83%D0%B2/id6746817734"
                 target="_blank"
@@ -121,7 +184,12 @@ const Index = () => {
                 App Store
               </a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-brand/40 hover:bg-brand/10">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-brand/40 hover:bg-brand/10"
+            >
               <a
                 href="https://www.rustore.ru/catalog/app/com.muv.fitness"
                 target="_blank"
@@ -361,6 +429,89 @@ const Index = () => {
           </div>
         </section>
 
+        <Section
+          number="06"
+          title="Что важно проговаривать"
+          subtitle="Во время тренировки желательно комментировать ключевые моменты — это поможет пользователю лучше понять упражнение."
+        >
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              "Название упражнения.",
+              "Количество повторений или время выполнения.",
+              "Вес, темп или уровень нагрузки.",
+              "Сколько отдыхать между подходами.",
+              "На что обратить внимание в технике.",
+              "Для какого уровня подходит упражнение.",
+              "Как упростить или усложнить движение.",
+              "Какие ошибки чаще всего делают люди.",
+            ].map((item, i) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 rounded-xl bg-surface-elevated/60 ring-1 ring-brand/15 p-4"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-brand/15 text-brand-glow shrink-0 text-sm font-semibold">
+                  {i + 1}
+                </div>
+                <p className="text-foreground/90 text-[15px] pt-0.5">{item}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          number="07"
+          title="Что не нужно делать"
+          subtitle="Ваша задача — снять качественный исходный материал. Наша задача — упаковать его в формат приложения МУВ."
+        >
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              "Специально сокращать тренировку",
+              "Делать всё слишком быстро",
+              "Молчать весь ролик",
+              "Снимать только «идеальные» короткие куски",
+              "Переживать, что видео получилось длинным",
+              "Самостоятельно делить видео на уроки и блоки",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 rounded-xl bg-destructive/5 ring-1 ring-destructive/25 p-4"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-destructive/15 text-destructive shrink-0">
+                  <X className="w-4 h-4" />
+                </div>
+                <p className="text-foreground/90 text-[15px] pt-0.5">{item}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <section data-pdf-section>
+          <div className="flex items-center gap-3 mb-6">
+            <ListChecks className="w-8 h-8 text-brand-glow" />
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Чек-лист перед отправкой
+            </h2>
+          </div>
+          <div className="rounded-2xl bg-surface-elevated/60 ring-1 ring-brand/20 p-6 md:p-8 space-y-3">
+            {[
+              "Видео снято горизонтально",
+              "Хорошо видно упражнение",
+              "Звук достаточно понятный",
+              "Тренировка снята в реальном темпе",
+              "Есть комментарии и экспертные подсказки",
+              "Проговорены уровни подготовки: новичок / средний / продвинутый",
+              "Понятны паузы, подходы и логика тренировки",
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <div className="flex items-center justify-center w-6 h-6 rounded-md bg-brand/20 text-brand-glow shrink-0 mt-0.5">
+                  <Check className="w-4 h-4" />
+                </div>
+                <p className="text-foreground/90">{item}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section
           className="rounded-3xl bg-gradient-to-br from-brand-deep via-brand to-brand-glow p-1 shadow-[var(--shadow-glow)]"
           data-pdf-section
@@ -368,7 +519,9 @@ const Index = () => {
           <div className="rounded-[calc(1.5rem-4px)] bg-background/95 backdrop-blur p-8 md:p-10 xl:p-14">
             <div className="grid gap-10 items-center xl:grid-cols-[minmax(0,1fr)_420px]">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Полезные ссылки</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Снимайте так, как тренируете в жизни
+                </h2>
                 <p className="text-muted-foreground text-lg mb-8">
                   Скачайте приложение Move и переходите на сайт, чтобы начать работу.
                 </p>
@@ -378,11 +531,20 @@ const Index = () => {
                     size="lg"
                     className="bg-gradient-to-r from-brand to-brand-glow text-brand-foreground"
                   >
-                    <a href="https://muv-app.ru/" target="_blank" rel="noreferrer">
-                      <Globe className="w-4 h-4 mr-2" /> Сайт muv-app.ru
+                    <a
+                      href="https://muv-app.ru/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Globe className="w-4 h-4 mr-2" /> muv-app.ru
                     </a>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-brand/40">
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-brand/40"
+                  >
                     <a
                       href="https://apps.apple.com/ru/app/%D0%BC%D1%83%D0%B2/id6746817734"
                       target="_blank"
@@ -391,7 +553,12 @@ const Index = () => {
                       App Store
                     </a>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-brand/40">
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-brand/40"
+                  >
                     <a
                       href="https://www.rustore.ru/catalog/app/com.muv.fitness"
                       target="_blank"
