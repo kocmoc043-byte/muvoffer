@@ -25,6 +25,8 @@ import {
   Target,
   Zap,
   Layers,
+  X,
+  ListChecks,
 } from "lucide-react";
 
 const Section = ({
