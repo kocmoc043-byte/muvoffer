@@ -94,7 +94,7 @@ const Index = () => {
             Техническое задание для тренеров
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl">
-            Стань тренером в <span className="text-brand-glow">MUV</span> — фитнес-платформе нового поколения
+            Стань тренером в <span className="text-brand-glow">МУВ</span> — фитнес-платформе нового поколения
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10">
             Простое пошаговое руководство: регистрация, оформление профиля и загрузка тренировок. На всё уйдёт 30–60 минут вашего времени.
@@ -165,8 +165,8 @@ const Index = () => {
         <Section number="01" title="Регистрация на платформе">
           <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start">
             <div className="grid sm:grid-cols-2 gap-4">
-              <Card icon={UserPlus} title="Скачайте приложение MUV">
-                Установите MUV из{" "}
+              <Card icon={UserPlus} title="Скачайте приложение МУВ">
+                Установите МУВ из{" "}
                 <a
                   href="https://apps.apple.com/ru/app/%D0%BC%D1%83%D0%B2/id6746817734"
                   className="text-brand-glow underline"
@@ -229,7 +229,7 @@ const Index = () => {
           </div>
 
           <p className="text-lg text-muted-foreground max-w-3xl mb-10 -mt-4">
-            Снимите <span className="text-foreground font-semibold">полноценную реальную тренировку</span>, как вы проводите её в обычной практике. Мы на стороне MUV сами разберём материал, обрежем лишнее и при необходимости соберём из одного видео несколько отдельных тренировок.
+            Снимите <span className="text-foreground font-semibold">полноценную реальную тренировку</span>, как вы проводите её в обычной практике. Мы на стороне МУВ сами разберём материал, обрежем лишнее и при необходимости соберём из одного видео несколько отдельных тренировок.
           </p>
 
           <div className="grid md:grid-cols-3 gap-5">
@@ -287,7 +287,7 @@ const Index = () => {
             <div className="no-print">
               <PhoneMock
                 src={screen5}
-                alt="Плеер тренировки в MUV"
+                alt="Плеер тренировки в МУВ"
                 imageClassName="w-full h-full object-contain object-center bg-background"
               />
             </div>
@@ -310,7 +310,7 @@ const Index = () => {
 
         <Section number="05" title="Оформление карточки тренировки">
           <div className="grid md:grid-cols-[auto_1fr] gap-10 items-start">
-            <PhoneMock src={screen4} alt="Карточка тренировки в MUV" />
+            <PhoneMock src={screen4} alt="Карточка тренировки в МУВ" />
             <div className="grid sm:grid-cols-2 gap-4">
               <Card icon={Camera} title="Обложка">
                 Яркое горизонтальное изображение или кадр из видео. Без мелкого текста — он не читается на превью.
@@ -337,7 +337,7 @@ const Index = () => {
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Полезные ссылки</h2>
                 <p className="text-muted-foreground text-lg mb-8">
-                  Скачайте приложение и переходите на сайт MUV, чтобы начать работу.
+                  Скачайте приложение и переходите на сайт МУВ, чтобы начать работу.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button
@@ -381,7 +381,7 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-8 tracking-tight">✅ Финальный чек-лист</h2>
           <div className="rounded-2xl bg-surface-elevated/60 ring-1 ring-brand/20 p-6 md:p-8 space-y-3">
             {[
-              "Зарегистрировался в MUV как тренер",
+              "Зарегистрировался в МУВ как тренер",
               "Загрузил фото профиля и описание о себе",
               "Добавил ссылки на Instagram / Telegram / YouTube",
               "Видео снято горизонтально, хорошо видно упражнение",
@@ -405,7 +405,7 @@ const Index = () => {
       <footer className="border-t border-brand/15 bg-surface/50">
         <div className="container max-w-6xl py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>
-            <span className="font-bold text-foreground">MUV</span> — фитнес-платформа нового поколения
+            <span className="font-bold text-foreground">МУВ</span> — фитнес-платформа нового поколения
           </div>
           <div className="flex gap-5">
             <a href="https://muv-app.ru/" target="_blank" rel="noreferrer" className="hover:text-brand-glow">
