@@ -10,8 +10,6 @@ import screen5 from "@/assets/screens/screen-5.png";
 import {
   Download,
   Loader2,
-  UserPlus,
-  Camera,
   Video,
   Dumbbell,
   Sparkles,
@@ -20,10 +18,13 @@ import {
   RectangleHorizontal,
   Clock,
   Globe,
-  Send,
-  Instagram,
-  Youtube,
   Check,
+  Camera,
+  MessageCircle,
+  Users,
+  Target,
+  Zap,
+  Layers,
 } from "lucide-react";
 
 const Section = ({
@@ -75,7 +76,7 @@ const Index = () => {
     if (exporting) return;
     setExporting(true);
     try {
-      await exportPdf("[data-pdf-root]", "MUV-trainer-brief.pdf");
+      await exportPdf("[data-pdf-root]", "Move-author-brief.pdf");
     } finally {
       setExporting(false);
     }
@@ -91,13 +92,14 @@ const Index = () => {
         <div className="relative container max-w-6xl py-16 md:py-24">
           <div className="inline-flex items-center gap-2 rounded-full bg-brand/15 ring-1 ring-brand/30 px-4 py-1.5 text-sm text-brand-glow mb-6">
             <Sparkles className="w-4 h-4" />
-            Техническое задание для тренеров
+            Техническое задание для авторов
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl">
-            Стань тренером в <span className="text-brand-glow">МУВ</span> — фитнес-платформе нового поколения
+            Как снимать тренировку для <span className="text-brand-glow">Move</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10">
-            Простое пошаговое руководство: регистрация, оформление профиля и загрузка тренировок. На всё уйдёт 30–60 минут вашего времени.
+            Снимайте тренировку так, как вы проводите её в реальной жизни. Команда Move сама разберёт
+            материал, обрежет лишнее и подготовит к публикации в приложении.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -145,14 +147,14 @@ const Index = () => {
           </div>
 
           <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-4">
-            <PhoneMock src={screen1} alt="Регистрация в MUV" rotate="-6deg" />
-            <PhoneMock src={screen2} alt="Профиль тренера" rotate="3deg" />
-            <PhoneMock src={screen3} alt="Информация о тренере" rotate="-3deg" />
-            <PhoneMock src={screen4} alt="Карточка тренировки" rotate="4deg" />
+            <PhoneMock src={screen1} alt="Move — экран тренировки" rotate="-6deg" />
+            <PhoneMock src={screen2} alt="Move — профиль автора" rotate="3deg" />
+            <PhoneMock src={screen3} alt="Move — карточка тренировки" rotate="-3deg" />
+            <PhoneMock src={screen4} alt="Move — плеер" rotate="4deg" />
             <div className="no-print">
               <PhoneMock
                 src={screen5}
-                alt="Плеер тренировки"
+                alt="Move — видео тренировки"
                 rotate="-5deg"
                 imageClassName="w-full h-full object-contain object-center bg-background"
               />
@@ -162,171 +164,202 @@ const Index = () => {
       </header>
 
       <div className="container max-w-6xl py-20 space-y-24">
-        <Section number="01" title="Регистрация на платформе">
+        <Section number="01" title="Главная задача">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Card icon={Video} title="Реальная тренировка">
+              Снимите полноценную тренировку так, как вы обычно её проводите. Не нужно подстраиваться
+              под камеру, ускоряться или делать всё «идеально».
+            </Card>
+            <Card icon={Clock} title="Любая длительность">
+              Тренировка может длиться 60, 90 минут или дольше. Не переживайте, что видео получилось
+              длинным — это нормально и ожидаемо.
+            </Card>
+            <Card icon={Layers} title="Move делает монтаж">
+              Наша команда самостоятельно разберёт материал, обрежет лишнее, разделит тренировку на
+              блоки и при необходимости соберёт из одного видео несколько отдельных тренировок.
+            </Card>
+            <Card icon={Sparkles} title="Живой экспертный формат">
+              Нам важен настоящий, честный и профессиональный контент — как будто вы тренируете
+              человека рядом с собой и параллельно объясняете, что и зачем делаете.
+            </Card>
+          </div>
+        </Section>
+
+        <Section number="02" title="Что можно снимать">
+          <p className="text-lg text-muted-foreground max-w-3xl mb-8 -mt-4">
+            В рамках одной съёмки можно показывать тренировку на разные группы мышц.
+          </p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <Card icon={Target} title="Одна группа мышц">
+              Например:{" "}
+              <span className="text-foreground font-semibold">Спина</span>
+            </Card>
+            <Card icon={Dumbbell} title="Две группы мышц">
+              Например:{" "}
+              <span className="text-foreground font-semibold">Грудь + трицепс</span>
+            </Card>
+            <Card icon={Zap} title="Три группы мышц">
+              Например:{" "}
+              <span className="text-foreground font-semibold">Ноги + ягодицы + пресс</span>
+            </Card>
+            <Card icon={Video} title="Полная тренировка">
+              Разминка, основная часть, заминка — всё{" "}
+              <span className="text-foreground font-semibold">в одном видео</span>.
+            </Card>
+          </div>
+          <div className="mt-4 rounded-2xl bg-brand/10 ring-1 ring-brand/30 p-5 text-[15px] text-foreground/90">
+            💡 Главное — чтобы тренировка была{" "}
+            <span className="font-semibold">логичной, понятной и полезной</span> для пользователя.
+          </div>
+        </Section>
+
+        <Section number="03" title="Как вести тренировку в кадре">
+          <p className="text-lg text-muted-foreground max-w-3xl mb-8 -mt-4">
+            Видео должно быть{" "}
+            <span className="text-foreground font-semibold">разговорным и живым</span> — не просто
+            сухое выполнение упражнений.
+          </p>
           <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start">
             <div className="grid sm:grid-cols-2 gap-4">
-              <Card icon={UserPlus} title="Скачайте приложение МУВ">
-                Установите МУВ из{" "}
-                <a
-                  href="https://apps.apple.com/ru/app/%D0%BC%D1%83%D0%B2/id6746817734"
-                  className="text-brand-glow underline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  App Store
-                </a>{" "}
-                или{" "}
-                <a
-                  href="https://www.rustore.ru/catalog/app/com.muv.fitness"
-                  className="text-brand-glow underline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  RuStore
-                </a>
-                .
+              <Card icon={MessageCircle} title="Называйте и объясняйте">
+                Называйте упражнения, объясняйте технику выполнения, проговаривайте, какие мышцы
+                работают.
               </Card>
-              <Card icon={Check} title="Создайте аккаунт">
-                Введите имя, e-mail и пароль. Подтвердите почту по коду из письма.
+              <Card icon={Clock} title="Комментируйте паузы">
+                Проговаривайте паузы и отдых — сколько секунд, что делать между подходами.
               </Card>
-              <Card icon={Sparkles} title="Выберите роль «Тренер»">
-                На экране выбора роли укажите «Я тренер» — это откроет личный кабинет автора.
+              <Card icon={Sparkles} title="Давайте экспертные подсказки">
+                Объясняйте частые ошибки, давайте советы по технике, добавляйте неформальные
+                комментарии и лёгкие шутки.
               </Card>
-              <Card icon={Send} title="Сообщите менеджеру">
-                Напишите нам, что вы зарегистрировались — мы активируем расширенные возможности.
+              <Card icon={Users} title="Объясняйте, кому подходит">
+                Говорите, для какого уровня подготовки подходит упражнение и кому оно будет особенно
+                полезно.
               </Card>
             </div>
-            <PhoneMock src={screen1} alt="Экран регистрации MUV" />
+            <PhoneMock src={screen3} alt="Move — карточка тренировки" />
           </div>
         </Section>
 
-        <Section number="02" title="Оформление профиля тренера">
-          <div className="grid md:grid-cols-[auto_1fr] gap-10 items-start">
-            <PhoneMock src={screen3} alt="Информация о тренере" />
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Card icon={Camera} title="Фото профиля">
-                Качественное портретное фото на нейтральном фоне. Лицо хорошо освещено, в кадре по плечи.
-              </Card>
-              <Card icon={UserPlus} title="Описание о себе">
-                Кто вы, какой вид спорта, ключевые достижения и регалии. 3–5 предложений живым языком — как будто рассказываете подписчику.
-              </Card>
-              <Card icon={Instagram} title="Соцсети и контакты">
-                Добавьте ссылки на Instagram, Telegram, YouTube — всё, что у вас есть. Это повышает доверие и подписки на ваш профиль.
-              </Card>
-              <Card icon={Youtube} title="Спортивная специализация">
-                Укажите направление: лыжи, бокс, бодибилдинг, фитнес, единоборства и т.д. — чтобы алгоритм рекомендовал вас целевой аудитории.
-              </Card>
-            </div>
-          </div>
-        </Section>
-
-        <section className="relative" data-pdf-section>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brand-glow text-brand-foreground font-bold text-xl shadow-[var(--shadow-glow)]">
-              03
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Загрузка тренировок</h2>
-          </div>
-
-          <p className="text-lg text-muted-foreground max-w-3xl mb-10 -mt-4">
-            Снимите <span className="text-foreground font-semibold">полноценную реальную тренировку</span>, как вы проводите её в обычной практике. Мы на стороне МУВ сами разберём материал, обрежем лишнее и при необходимости соберём из одного видео несколько отдельных тренировок.
+        <Section number="04" title="Уровни подготовки">
+          <p className="text-lg text-muted-foreground max-w-3xl mb-8 -mt-4">
+            По возможности отмечайте, для какого уровня подходит упражнение. Если нагрузка
+            отличается — обязательно проговорите это в кадре.
           </p>
-
           <div className="grid md:grid-cols-3 gap-5">
-            <Card icon={Clock} title="Реальный формат">
-              Тренировка может длиться <span className="text-foreground font-semibold">60, 90 минут или дольше</span>. Не нужно ускоряться или сокращать процесс ради камеры — снимайте в обычном темпе.
+            <Card icon={Target} title="Новичок">
+              Объясните,{" "}
+              <span className="text-foreground font-semibold">как упростить</span> упражнение: какой
+              вес, время и темп выбрать для начинающих.
+              <div className="mt-3 text-sm text-brand-glow italic">«Новичку — 30 сек без веса»</div>
             </Card>
-            <Card icon={Dumbbell} title="Что можно показывать">
-              Одна группа мышц (спина), две (грудь + трицепс), три (ноги + ягодицы + пресс) или полноценная тренировка с разминкой, основной частью и заминкой.
+            <Card icon={Dumbbell} title="Средний уровень">
+              Покажите{" "}
+              <span className="text-foreground font-semibold">базовый рабочий вариант</span> —
+              стандартный режим для большинства занимающихся.
+              <div className="mt-3 text-sm text-brand-glow italic">«45 сек с лёгким весом»</div>
             </Card>
-            <Card icon={Mic} title="Живой формат">
-              Называйте упражнения, объясняйте технику, проговаривайте паузы и отдых, давайте экспертные подсказки, разбирайте частые ошибки. Будто тренируете человека рядом с собой.
-            </Card>
-            <Card icon={Sparkles} title="Уровни подготовки">
-              Отмечайте, для какого уровня упражнение: <span className="text-foreground font-semibold">новичок</span> — как упростить, <span className="text-foreground font-semibold">средний</span> — базовый вариант, <span className="text-foreground font-semibold">продвинутый</span> — как усложнить и увеличить нагрузку.
-            </Card>
-            <Card icon={Video} title="Что проговаривать">
-              Название упражнения, количество повторений или время, вес и темп, отдых между подходами, ключевые моменты техники, типичные ошибки и какие мышцы работают.
-            </Card>
-            <Card icon={Check} title="Что не нужно делать">
-              Не сокращайте тренировку, не молчите весь ролик, не снимайте только «идеальные» короткие куски и не делите видео на уроки самостоятельно — это сделаем мы.
+            <Card icon={Zap} title="Продвинутый">
+              Объясните,{" "}
+              <span className="text-foreground font-semibold">как усложнить</span>: увеличить
+              нагрузку, интенсивность или сократить отдых.
+              <div className="mt-3 text-sm text-brand-glow italic">«60–90 сек с рабочим весом»</div>
             </Card>
           </div>
-        </section>
-
-        <div
-          data-pdf-section
-          className="rounded-2xl bg-brand/10 ring-1 ring-brand/30 p-5 text-[15px] text-foreground/90 -mt-16"
-        >
-          💡 <span className="font-semibold">Пример по уровням:</span> «Новичку — 30 секунд без веса. Среднему — 45 секунд с лёгким весом. Продвинутому — 60–90 секунд с рабочим весом и меньшим отдыхом.» На монтаже мы отдельно выделим рекомендации для каждого уровня.
-        </div>
-
-        <section className="relative" data-pdf-section>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brand-glow text-brand-foreground font-bold text-xl shadow-[var(--shadow-glow)]">
-              04
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Технические требования к съёмке</h2>
+          <div className="mt-4 rounded-2xl bg-brand/10 ring-1 ring-brand/30 p-5 text-[15px] text-foreground/90">
+            💬 На монтаже Move отдельно выделит рекомендации для каждого уровня — это помогает
+            аудитории выбрать подходящую нагрузку.
           </div>
+        </Section>
 
+        <Section number="05" title="Технические требования к съёмке">
           <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start">
             <div className="grid sm:grid-cols-2 gap-4">
               <Card icon={RectangleHorizontal} title="Горизонтальная съёмка">
-                Снимаем только <span className="text-foreground font-semibold">горизонтально</span> (16:9). Камера стоит устойчиво на штативе, в кадре видно всё тело и упражнение не обрезается по рукам, ногам или корпусу.
+                Все тренировки снимаем{" "}
+                <span className="text-foreground font-semibold">горизонтально</span>. Камера стоит
+                устойчиво, видно всё тело, упражнение не обрезается по рукам, ногам или корпусу.
               </Card>
-              <Card icon={Sun} title="Свет и кадр">
-                Хорошо освещённое помещение, желательно зал. Без контрового света из окна за спиной. Кадр не слишком близкий — должно быть понятно, как выполняется движение.
+              <Card icon={Sun} title="Понятный ракурс">
+                Снимайте спереди, сбоку, сзади или под углом 45°. Выбирайте ракурс так, чтобы была{" "}
+                <span className="text-foreground font-semibold">понятна техника</span> упражнения.
               </Card>
-              <Card icon={Mic} title="Качественный звук">
-                Используйте петличный микрофон или снимайте в тихом помещении. Чётко проговаривайте технику, паузы, отдых и подсказки.
+              <Card icon={Mic} title="Голосовые пояснения">
+                Используйте петличный микрофон или снимайте в тихом помещении. Чётко проговаривайте
+                технику, вес, темп и количество повторений.
               </Card>
-              <Card icon={Video} title="Ракурсы">
-                Можно снимать спереди, сбоку, сзади или под углом 45°. Выбирайте ракурс так, чтобы была понятна техника. Для постановки спины или ног — покажите дополнительный ракурс.
+              <Card icon={Camera} title="Что комментировать">
+                Название упражнения, повторения/время, нагрузку, отдых, технику, типичные ошибки и
+                рекомендации по уровням подготовки.
               </Card>
             </div>
             <div className="no-print">
               <PhoneMock
                 src={screen5}
-                alt="Плеер тренировки в МУВ"
+                alt="Move — плеер тренировки"
                 imageClassName="w-full h-full object-contain object-center bg-background"
               />
             </div>
           </div>
-        </section>
+        </Section>
 
-        <div data-pdf-section className="rounded-2xl bg-gradient-to-br from-brand/20 to-brand-glow/10 ring-1 ring-brand/40 p-6 -mt-16">
+        <div
+          data-pdf-section
+          className="rounded-2xl bg-gradient-to-br from-brand-deep via-brand/50 to-surface-elevated ring-1 ring-brand/40 p-6 md:p-8 -mt-16"
+        >
           <div className="flex items-start gap-4">
             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand text-brand-foreground shrink-0">
-              <Camera className="w-6 h-6" />
+              <Video className="w-6 h-6" />
             </div>
-            <div>
-              <h3 className="text-xl font-bold mb-2">Нет возможности снять в зале?</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Мы предоставим зал и поможем со съёмкой. Сообщите об этом <span className="text-brand-glow font-semibold">заранее</span>, чтобы мы запланировали и забронировали площадку.
+            <div className="flex-1">
+              <h3 className="text-xl font-bold mb-4">Что не нужно делать</h3>
+              <div className="grid sm:grid-cols-2 gap-2 mb-4">
+                {[
+                  "Специально сокращать тренировку",
+                  "Делать всё слишком быстро",
+                  "Молчать весь ролик",
+                  "Снимать только «идеальные» короткие куски",
+                  "Переживать, что видео получилось длинным",
+                  "Самостоятельно делить видео на блоки и уроки",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2 text-[15px] text-muted-foreground">
+                    <span className="text-brand-glow mt-0.5 shrink-0 font-bold">✕</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-muted-foreground text-[15px]">
+                Ваша задача — снять{" "}
+                <span className="text-foreground font-semibold">качественный исходный материал</span>
+                . Наша задача — аккуратно упаковать его в формат приложения Move.
               </p>
             </div>
           </div>
         </div>
 
-        <Section number="05" title="Оформление карточки тренировки">
-          <div className="grid md:grid-cols-[auto_1fr] gap-10 items-start">
-            <PhoneMock src={screen4} alt="Карточка тренировки в МУВ" />
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Card icon={Camera} title="Обложка">
-                Яркое горизонтальное изображение или кадр из видео. Без мелкого текста — он не читается на превью.
-              </Card>
-              <Card icon={Sparkles} title="Название программы">
-                Коротко и понятно: «Утренняя разминка лыжника», «Бокс: работа на скорость», «Силовой блок для бодибилдера».
-              </Card>
-              <Card icon={Send} title="Описание">
-                2–4 предложения: для кого тренировка, какой результат, какой инвентарь нужен, уровень сложности.
-              </Card>
-              <Card icon={Video} title="Само видео">
-                Загружаете готовый файл по ТЗ из шага 04. Платформа сама конвертирует и оптимизирует для зрителей.
-              </Card>
-            </div>
+        <section data-pdf-section>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 tracking-tight">
+            ✅ Чек-лист перед отправкой
+          </h2>
+          <div className="rounded-2xl bg-surface-elevated/60 ring-1 ring-brand/20 p-6 md:p-8 space-y-3">
+            {[
+              "Видео снято горизонтально",
+              "Хорошо видно упражнение — не обрезается по рукам, ногам или корпусу",
+              "Звук достаточно понятный",
+              "Тренировка снята в реальном темпе",
+              "Есть комментарии и экспертные подсказки",
+              "Проговорены уровни подготовки: новичок / средний / продвинутый",
+              "Понятны паузы, подходы и общая логика тренировки",
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <div className="flex items-center justify-center w-6 h-6 rounded-md bg-brand/20 text-brand-glow shrink-0 mt-0.5">
+                  <Check className="w-4 h-4" />
+                </div>
+                <p className="text-foreground/90">{item}</p>
+              </div>
+            ))}
           </div>
-        </Section>
+        </section>
 
         <section
           className="rounded-3xl bg-gradient-to-br from-brand-deep via-brand to-brand-glow p-1 shadow-[var(--shadow-glow)]"
@@ -337,7 +370,7 @@ const Index = () => {
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Полезные ссылки</h2>
                 <p className="text-muted-foreground text-lg mb-8">
-                  Скачайте приложение и переходите на сайт МУВ, чтобы начать работу.
+                  Скачайте приложение Move и переходите на сайт, чтобы начать работу.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button
@@ -370,34 +403,10 @@ const Index = () => {
                 </div>
               </div>
               <div className="flex justify-center gap-4 flex-wrap">
-                <PhoneMock src={screen2} alt="Профиль" rotate="-4deg" />
-                <PhoneMock src={screen4} alt="Тренировка" rotate="4deg" />
+                <PhoneMock src={screen2} alt="Move — профиль" rotate="-4deg" />
+                <PhoneMock src={screen4} alt="Move — тренировка" rotate="4deg" />
               </div>
             </div>
-          </div>
-        </section>
-
-        <section data-pdf-section>
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 tracking-tight">✅ Финальный чек-лист</h2>
-          <div className="rounded-2xl bg-surface-elevated/60 ring-1 ring-brand/20 p-6 md:p-8 space-y-3">
-            {[
-              "Зарегистрировался в МУВ как тренер",
-              "Загрузил фото профиля и описание о себе",
-              "Добавил ссылки на Instagram / Telegram / YouTube",
-              "Видео снято горизонтально, хорошо видно упражнение",
-              "Звук понятный, тренировка снята в реальном темпе",
-              "Есть комментарии и экспертные подсказки",
-              "Проговорены уровни подготовки: новичок / средний / продвинутый",
-              "Понятны паузы, подходы и логика тренировки",
-              "Сообщил менеджеру о публикации",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-3">
-                <div className="flex items-center justify-center w-6 h-6 rounded-md bg-brand/20 text-brand-glow shrink-0 mt-0.5">
-                  <Check className="w-4 h-4" />
-                </div>
-                <p className="text-foreground/90">{item}</p>
-              </div>
-            ))}
           </div>
         </section>
       </div>
@@ -405,10 +414,16 @@ const Index = () => {
       <footer className="border-t border-brand/15 bg-surface/50">
         <div className="container max-w-6xl py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>
-            <span className="font-bold text-foreground">МУВ</span> — фитнес-платформа нового поколения
+            <span className="font-bold text-foreground">Move</span> — фитнес-платформа нового
+            поколения
           </div>
           <div className="flex gap-5">
-            <a href="https://muv-app.ru/" target="_blank" rel="noreferrer" className="hover:text-brand-glow">
+            <a
+              href="https://muv-app.ru/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-brand-glow"
+            >
               muv-app.ru
             </a>
             <a
