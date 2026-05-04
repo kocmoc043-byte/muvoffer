@@ -461,19 +461,6 @@ const Index = () => {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-gradient-to-r from-brand to-brand-glow text-brand-foreground"
-                  >
-                    <a
-                      href="https://muv-app.ru/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Globe className="w-4 h-4 mr-2" /> muv-app.ru
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
                     variant="outline"
                     className="border-brand/40"
                   >
