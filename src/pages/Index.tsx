@@ -165,15 +165,6 @@ const Index = () => {
           <div className="flex flex-wrap gap-3">
             <Button
               asChild
-              size="lg"
-              className="bg-gradient-to-r from-brand to-brand-glow hover:opacity-90 text-brand-foreground font-semibold"
-            >
-              <a href="https://muv-app.ru/" target="_blank" rel="noreferrer">
-                <Globe className="w-4 h-4 mr-2" /> muv-app.ru
-              </a>
-            </Button>
-            <Button
-              asChild
               variant="outline"
               size="lg"
               className="border-brand/40 hover:bg-brand/10"
@@ -398,34 +389,6 @@ const Index = () => {
           </div>
         </section>
 
-        <Section
-          number="06"
-          title="Что важно проговаривать"
-          subtitle="Во время тренировки желательно комментировать ключевые моменты — это поможет пользователю лучше понять упражнение."
-        >
-          <div className="grid sm:grid-cols-2 gap-3">
-            {[
-              "Название упражнения.",
-              "Количество повторений или время выполнения.",
-              "Вес, темп или уровень нагрузки.",
-              "Сколько отдыхать между подходами.",
-              "На что обратить внимание в технике.",
-              "Для какого уровня подходит упражнение.",
-              "Как упростить или усложнить движение.",
-              "Какие ошибки чаще всего делают люди.",
-            ].map((item, i) => (
-              <div
-                key={item}
-                className="flex items-start gap-3 rounded-xl bg-surface-elevated/60 ring-1 ring-brand/15 p-4"
-              >
-                <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-brand/15 text-brand-glow shrink-0 text-sm font-semibold">
-                  {i + 1}
-                </div>
-                <p className="text-foreground/90 text-[15px] pt-0.5">{item}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
 
         <Section
           number="07"
